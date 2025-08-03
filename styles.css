@@ -1,0 +1,258 @@
+/* -------- Barre de navigation fixe -------- */
+.app-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #4caf50;
+  color: white;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.app-bar-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.app-bar h1 {
+  margin: 0;
+  font-size: 1.6em;
+  flex-grow: 1;
+  text-align: center;
+  color: white;
+}
+
+.menu-container {
+  position: relative;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.menu-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  overflow: hidden;
+  min-width: 180px;
+  z-index: 1001;
+}
+
+.menu-dropdown button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.95em;
+  color: #2d4739;
+  cursor: pointer;
+}
+
+.menu-dropdown button:hover {
+  background-color: #f1f1f1;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+  padding-top: 70px;
+}
+
+body.light-mode,
+body:not(.dark-mode) {
+  background-color: #f1f7f3;
+  color: #2d4739;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+h2 {
+  color: #3d5c47;
+  margin-bottom: 15px;
+}
+
+form {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: -10px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #2d4739;
+}
+
+select.form-input {
+  appearance: none;
+}
+
+form button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+form button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+#tree-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: start;
+}
+
+.tree-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 220px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tree-card strong {
+  font-size: 1.2em;
+  color: #36634f;
+  margin-bottom: 8px;
+}
+
+.tree-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tree-actions button {
+  flex: 1;
+  padding: 8px;
+  font-size: 0.9em;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-water {
+  background-color: #00796b;
+}
+
+.btn-edit {
+  background-color: #f9a825;
+  color: #000;
+}
+
+.btn-delete {
+  background-color: #d32f2f;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode form,
+body.dark-mode .tree-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .form-input,
+body.dark-mode select.form-input {
+  background-color: #2b2b2b;
+  color: #ffffff;
+  border: 1px solid #555;
+}
+
+body.dark-mode .tree-card strong {
+  color: #c8e6c9;
+}
+
+body.dark-mode form button[type="submit"] {
+  background-color: #2e7d32;
+}
+
+body.dark-mode form button[type="submit"]:hover {
+  background-color: #388e3c;
+}
+
+body.dark-mode .menu-dropdown {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode .menu-dropdown button {
+  color: #ffffff;
+}
+
+body.dark-mode .menu-dropdown button:hover {
+  background-color: #333;
+}
+
+@media screen and (max-width: 600px) {
+  #tree-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tree-card {
+    width: 90%;
+  }
+
+  .tree-card.clickable {
+  cursor: pointer;
+}
+
+
+  form {
+    padding: 15px;
+  }
+}

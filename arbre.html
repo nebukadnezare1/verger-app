@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Détail de l'arbre</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header class="app-bar">
+        <div class="app-bar-content">
+            <h1 id="tree-title">🌳 Arbre</h1>
+            <div class="menu-container">
+                <button id="menu-button" class="menu-button">︙</button>
+                <div id="menu-dropdown" class="menu-dropdown">
+                    <button id="theme-toggle">🌓 Basculer thème</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tree-details">
+            <p><strong>Type :</strong> <span id="tree-type"></span></p>
+            <p><strong>Fréquence :</strong> tous les <span id="tree-frequency"></span> jours</p>
+            <p><strong>Dernier arrosage :</strong> <span id="tree-last-watered"></span></p>
+            <p><strong>Prochain arrosage :</strong> <span id="tree-next-watering"></span></p>
+
+            <div class="tree-actions">
+                <button class="btn-water" id="btn-water">💧 Marquer comme arrosé</button>
+                <button class="btn-edit" id="btn-edit">✏️ Modifier</button>
+                <button class="btn-delete" id="btn-delete">🗑 Supprimer</button>
+            </div>
+            <br>
+            <button class="btn-back" onclick="history.back()">🔙 Retour</button>
+        </div>
+    </div>
+
+    <script src="arbre.js"></script>
+</body>
+
+</html>

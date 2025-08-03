@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mon Verger</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-bar">
+    <div class="app-bar-content">
+      <h1>🌿 Mon Verger</h1>
+      <div class="menu-container">
+        <button id="menu-button" class="menu-button">︙</button>
+        <div id="menu-dropdown" class="menu-dropdown">
+          <button id="theme-toggle">🌓 Basculer thème</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="form-section">
+      <h2>Ajouter un arbre fruitier</h2>
+      <form id="tree-form">
+        <label for="tree-type-select">Type d’arbre</label>
+        <select id="tree-type-select" class="form-input" required>
+          <option value="">-- Choisir un arbre --</option>
+          <option value="Pommier">Pommier</option>
+          <option value="Citronnier">Citronnier</option>
+          <option value="Figuier">Figuier</option>
+          <option value="Pêcher">Pêcher</option>
+          <option value="Grenadier">Grenadier</option>
+          <option value="Olivier">Olivier</option>
+          <option value="Ceriser">Cerisier</option>
+          <option value="Abricotier">Abricotier</option>
+          <option value="Autre">Autre...</option>
+        </select>
+
+        <div id="custom-type-container" style="display:none;">
+          <label>Nom personnalisé</label>
+          <input type="text" id="custom-tree-type" class="form-input" placeholder="Ex: Néflier du Japon" />
+        </div>
+
+        <label>Fréquence d’arrosage (en jours)</label>
+        <input type="number" id="watering-frequency" class="form-input" placeholder="Ex: 7" required />
+
+        <button type="submit">Ajouter l’arbre 🌱</button>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <h2>🌲 Mes arbres fruitiers</h2>
+      <div id="tree-list"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
