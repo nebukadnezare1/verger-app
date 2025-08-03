@@ -1,22 +1,21 @@
 let trees = JSON.parse(localStorage.getItem("trees") || "[]");
+displayTrees();
 
-const form = document.getElementById("tree-form");
-const treeList = document.getElementById("tree-list");
-const typeSelect = document.getElementById("tree-type-select");
-const customContainer = document.getElementById("custom-type-container");
-const customInput = document.getElementById("custom-tree-type");
-const wateringInput = document.getElementById("watering-frequency");
-
-typeSelect.addEventListener("change", () => {
-  customContainer.style.display = (typeSelect.value === "Autre") ? "block" : "none";
-  customInput.required = (typeSelect.value === "Autre");
+document.getElementById("tree-type-select").addEventListener("change", function () {
+  const customContainer = document.getElementById("custom-type-container");
+  customContainer.style.display = this.value === "Autre" ? "block" : "none";
 });
 
-form.addEventListener("submit", (e) => {
+document.getElementById("tree-form").addEventListener("submit", function (e) {
   e.preventDefault();
-  let type = typeSelect.value === "Autre" ? customInput.value.trim() : typeSelect.value;
-  const frequency = parseInt(wateringInput.value);
-  if (!type || !frequency) return;
+
+  const select = document.getElementById("tree-type-select");
+  const type = select.value === "Autre"
+    ? document.getElementById("custom-tree-type").value.trim()
+    : select.value;
+  const frequency = parseInt(document.getElementById("watering-frequency").value);
+
+  if (!type || isNaN(frequency)) return;
 
   const newTree = {
     id: Date.now(),
@@ -24,30 +23,46 @@ form.addEventListener("submit", (e) => {
     frequency,
     lastWatered: null
   };
+
   trees.push(newTree);
   localStorage.setItem("trees", JSON.stringify(trees));
-  form.reset();
-  typeSelect.value = "";
-  customContainer.style.display = "none";
   displayTrees();
+  this.reset();
+  document.getElementById("custom-type-container").style.display = "none";
 });
 
 function displayTrees() {
-  treeList.innerHTML = "";
+  const list = document.getElementById("tree-list");
+  list.innerHTML = "";
   trees.forEach(tree => {
     const div = document.createElement("div");
     div.className = "tree-card clickable";
-    div.innerHTML = `<strong>${tree.type}</strong><br>
+    div.innerHTML = `
+      <strong>${tree.type}</strong><br>
       Fréquence : tous les ${tree.frequency} jours<br>
-      Dernier arrosage : ${tree.lastWatered || "Jamais"}`;
-    div.addEventListener("click", () => {
+      Dernier arrosage : ${tree.lastWatered ? formatDateFr(tree.lastWatered) : "Jamais"}<br>
+      Prochain arrosage : ${getNextWatering(tree)}
+    `;
+    div.onclick = () => {
       window.location.href = `arbre.html?id=${tree.id}`;
-    });
-    treeList.appendChild(div);
+    };
+    list.appendChild(div);
   });
 }
 
-// Mode sombre
+function getNextWatering(tree) {
+  if (!tree.lastWatered) return "Inconnu";
+  const next = new Date(tree.lastWatered);
+  next.setDate(next.getDate() + tree.frequency);
+  return next.toLocaleDateString("fr-FR");
+}
+
+function formatDateFr(isoDate) {
+  const date = new Date(isoDate);
+  return date.toLocaleDateString("fr-FR");
+}
+
+// 🌗 Thème
 const toggleButton = document.getElementById("theme-toggle");
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "dark") setDarkMode(true);
@@ -65,6 +80,7 @@ function setDarkMode(enable) {
   if (toggleButton) toggleButton.textContent = enable ? "☀️ Mode clair" : "🌓 Mode sombre";
 }
 
+// ☰ Menu
 const menuBtn = document.getElementById("menu-button");
 const dropdown = document.getElementById("menu-dropdown");
 if (menuBtn && dropdown) {
@@ -77,5 +93,3 @@ if (menuBtn && dropdown) {
     }
   });
 }
-
-displayTrees();
